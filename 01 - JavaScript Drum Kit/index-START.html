@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>JS Drum Kit</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
     <div class="keys">
@@ -43,6 +43,10 @@
         <kbd>L</kbd>
         <span class="sound">tink</span>
       </div>
+      <div data-key="186" class="key">
+        <kbd>;</kbd>
+        <span class="sound">Drake</span>
+      </div>
     </div>
 
     <audio data-key="65" src="sounds/clap.wav"></audio>
@@ -54,6 +58,11 @@
     <audio data-key="74" src="sounds/snare.wav"></audio>
     <audio data-key="75" src="sounds/tom.wav"></audio>
     <audio data-key="76" src="sounds/tink.wav"></audio>
+    <audio
+      data-key="186"
+      src="sounds/Drake - Laugh Now Cry Later (feat. Lil Durk).wav"
+      onended="removeStyling()"
+    ></audio>
 
     <script>
       const playSound = (event) => {
@@ -72,12 +81,18 @@
         e.target.classList.remove('playing');
       };
 
+      const removeStyling = () => {
+        let key = document.querySelector('.playing')
+        key.classList.remove('playing');
+      }
+
       window.addEventListener('keydown', playSound);
 
       const keys = document.querySelectorAll('.key');
       keys.forEach((key) => {
+        if (key.textContent.indexOf('Drake') > -1) return;
         key.addEventListener('transitionend', removeTransition);
       });
-    </script>
+    </script
   </body>
 </html>
